@@ -16,14 +16,18 @@ public class Factorial {
         
 
     public static void factorial(){
-        int i, res=1;
+         int i, res=1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese un numero:");
+        try {
         int numA = Integer.valueOf(sc.nextLine());
    
         for(i=1; i<=numA; i++){
             res *=i;
         }
         System.out.println("El facotorial de "+numA + " es: "+res);
-    }
+        } catch (Exception e){
+            System.out.println("Tiene que ingresar un numero");
+        }
+    }   
 }
