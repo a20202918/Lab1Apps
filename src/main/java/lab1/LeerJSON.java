@@ -13,20 +13,36 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Liz
  */
 public class LeerJSON {
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            LeerJSON persona;
-            persona = ObjectMapper.readValue(Paths.get(this.getClass().getResource("/personas.json").getFile()), LeerJSON.class);
+    
+         ObjectMapper mapper = new ObjectMapper();
+         String Persona[];
+            // convert JSON array to list of books
+        List<Persona> personas = Arrays.asList(mapper.readValue(Paths.get(this.getClass().getResource("/personas.json")).toFile(), Persona[].class));
             
-            System.out.println(persona);
+        public void mostrar(){
+            for (int i = 0; i < 11; ++i) System.out.println(Persona[i] + " ");
         }
+        
+        public void crear(){
+            Scanner teclado = new Scanner(System.in);
+            System.out.println("Ingrese nombre");
+            String nombre = teclado.nextLine();
+            
+            Map<String, Object> map = new HashMap<>();
+            map.put("nombre", nombre);
 
-        catch (Exception ex) {
-        ex.printStackTrace();
+            // create object mapper instance
+            ObjectMapper mapper = new ObjectMapper();
+
+            // convert map to JSON file
+            mapper.writeValue(Paths.get("user.json").toFile(), map);
         }
+}
